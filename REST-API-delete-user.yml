@@ -14,7 +14,7 @@
   tasks:
     - name: DELETE a tower user via REST API
       uri:
-        url: "{{  'https://' +  tower_host +  '/api/v2/users/' + user_to_delete + '/' | urlencode }}"
+        url: "{{  'https://' +  tower_host +  '/api/controller/v2/users/' + user_to_delete + '/' | urlencode }}"
         # https://tower.lab.example.com/api/v2/users/zzuser/
         method: DELETE
         validate_certs: no

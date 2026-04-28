@@ -1,0 +1,10 @@
+# PLaybook to be used to gather facts for fact-caching
+- name: Fact caching with set fact
+  gather_facts: yes
+  hosts: all
+  tasks:
+  - name: set aa fact value
+    set_fact: 
+      myname: bk
+      cacheable: true
+

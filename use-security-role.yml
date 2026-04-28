@@ -1,0 +1,4 @@
+- name: Playbook to use a role that is in a different git repo
+  hosts: all
+  roles:
+    - security-role

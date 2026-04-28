@@ -1,0 +1,23 @@
+- name: Launch a Job Template on controller using the REST API
+  hosts: localhost
+  vars:
+    controller_host: controller.lab.example.com
+    controller_job: Demo%20Job%20Template
+    controller_user: admin
+    controller_pass: redhat
+  tasks:
+    - name: Trigger the Demo Job Template on controller using REST
+      uri:
+        url: https://{{ controller_host }}/api/v2/job_templates/{{ controller_job }}/launch/
+        method: POST
+        validate_certs: no
+        return_content: yes
+        user: "{{ controller_user }}"
+        password: "{{ controller_pass }}"
+        force_basic_auth: yes
+        status_code: 201
+      register: output
+    - name: Show the return output
+      debug:
+        var: output
+        verbosity: 1

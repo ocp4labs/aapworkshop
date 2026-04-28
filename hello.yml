@@ -1,0 +1,14 @@
+---
+- name: First play
+  hosts: all
+  vars:
+    myname: john
+    greeting: Good morning
+  tasks:
+    - command: id
+    - name: Say hello task
+      debug:
+        msg: "{{ greeting }} to {{ myname}} from Ansible"
+      tags:
+      - prod
+

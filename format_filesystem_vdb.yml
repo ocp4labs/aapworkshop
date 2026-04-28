@@ -1,0 +1,11 @@
+# Uses community.filesystem for formatting
+# which is not included in the ee-supported EE
+- name: Play for format /dev/vdb with ext4
+  hosts: all
+  tasks:
+  - name: Format /dev/vdb with ext4
+    community.general.filesystem:
+      fstype: ext4
+      dev: /dev/vdb
+
+

@@ -1,0 +1,3 @@
+---
+- src: https://github.com/bkthong/tower-security-role
+  name: security-role    #otherwise role-name defaults to git repo name

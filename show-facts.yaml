@@ -1,0 +1,25 @@
+---
+- name: Play to display facts
+  hosts: all
+  gather_facts: true
+  tasks:
+    - name: Display ansible_facts variable for {{ inventory_hostname }}
+      ansible.builtin.debug:
+        var: ansible_facts
+        verbosity: 1
+    - name: Debug 
+      ansible.builtin.debug:
+        msg: "Value of ansible_facts['default_ipv4']['address']:  {{ ansible_facts['default_ipv4']['address'] }}"
+    - name: Debug 
+      ansible.builtin.debug:
+        msg: "Value of ansible_facts['hostname']:  {{ ansible_facts['hostname'] }}"
+    - name: Debug 
+      ansible.builtin.debug:
+        msg: "Value of ansible_facts['memtotal_mb']:  {{ ansible_facts['memtotal_mb'] }}"
+
+    - name: Save ansible_facts to a file on workstation for reference. View with jq.
+      delegate_to: localhost
+      ansible.builtin.copy:
+        content: "{{ ansible_facts }}"
+        dest: fact_dump-{{ inventory_hostname }}
+

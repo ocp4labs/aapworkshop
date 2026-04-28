@@ -1,0 +1,9 @@
+# PLaybook to be used to gather facts for fact-caching
+- name: Fact caching with set fact
+  gather_facts: no
+  hosts: localhost
+  tasks:
+  - name: set aa fact value
+    debug: 
+      var: ansible_facts
+

@@ -1,0 +1,8 @@
+- name: Play that uses the fact cache
+  gather_facts: no
+  hosts: all
+  tasks:
+    - debug:
+        var: ansible_facts.default_ipv4.address
+    - debug:
+        var: ansible_default_ipv4.address 

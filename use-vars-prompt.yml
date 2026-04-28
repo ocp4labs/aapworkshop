@@ -1,0 +1,12 @@
+- name: Play that uses vars_prompt that is not supported by tower
+  hosts: localhost
+  vars_prompt:
+    - name: version
+      prompt: Please enter a version number, defaults to 1
+      default: 1
+      private: no
+
+  tasks:
+    - debug:
+        msg: The value of version is {{ version }}
+

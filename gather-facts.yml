@@ -1,0 +1,5 @@
+# PLaybook to be used to gather facts for fact-caching
+- name: Fact caching
+  gather_facts: yes
+  hosts: all
+

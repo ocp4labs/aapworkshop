@@ -1,0 +1,11 @@
+---
+# Usage:     ansible-galaxy collection install -p COLLECTIONS_DIR  -r THIS_FILE.yml 
+# workaround for bug by specifying source. See discussion at:
+# https://forum.ansible.com/t/skipping-galaxy-server-https-galaxy-ansible-com-api/1281/9
+# https://access.redhat.com/solutions/7036755
+
+collections:
+  - name: community.general
+    source: https://old-galaxy.ansible.com/  
+    
+...

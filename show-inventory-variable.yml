@@ -1,0 +1,10 @@
+- name: Play to utilize inventory variables
+  hosts: all
+  become: true
+  tasks:
+    - debug:
+        msg: The value of db_package is {{ db_package }}
+    - name: Install {{ db_package }}
+      yum:
+        name: "{{ db_package }}"
+        state: latest

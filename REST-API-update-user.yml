@@ -1,0 +1,33 @@
+# Use firefox to browse the API to api/v2/users
+# Use the OPTIONS action button to get info on the endpoint
+# - Scroll through and you will see the POST action and the 
+#   list of fields it accepts and whether it is required or not
+
+- name: Update  a user on tower using the REST API
+  hosts: localhost
+  gather_facts: false
+  vars:
+    tower_host: tower.lab.example.com
+    tower_user: admin
+    tower_pass: redhat
+    user_to_edit: zzuser
+  tasks:
+    - name: Update a tower user via REST API
+      uri:
+        url: "{{ 'https://' + tower_host + '/api/v2/users/' + user_to_edit + '/' | urlencode }}"
+        # https://tower.lab.example.com/api/v2/users/zzuser/
+        method: PATCH
+        validate_certs: no
+        return_content: yes
+        user: "{{ tower_user }}"
+        password: "{{ tower_pass }}"
+        force_basic_auth: yes
+        status_code: 200
+        body:
+          last_name: "{{ 'adam' | upper }}" 
+        body_format: json
+      register: output
+    - name: Show the return output
+      debug:
+        var: output
+        verbosity: 1

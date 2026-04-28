@@ -1,0 +1,43 @@
+- name: Launch a Job Template on controller using the REST API via Personal Access Token
+  hosts: localhost
+  gather_facts: false
+  vars:
+    controller_host: controller.lab.example.com
+    controller_job: Demo%20Job%20Template
+    controller_user: admin
+    controller_pass: redhat
+  tasks:
+    - name: Get personal access token
+      uri: 
+        url: "https://{{ controller_host }}/api/v2/users/1/personal_tokens/"
+        method: POST
+        validate_certs: false
+        return_content: true
+        user: "{{ controller_user }}"
+        password: "{{ controller_pass }}"
+        force_basic_auth: yes
+        status_code: 201
+      register: response
+
+    - name: Show the return output
+      debug:
+        var: response
+        verbosity: 1
+        
+    - name: Trigger the Demo Job Template on controller using REST
+      uri:
+        url: https://{{ controller_host }}/api/v2/job_templates/{{ controller_job }}/launch/
+        method: POST
+        validate_certs: no
+        return_content: yes
+        force_basic_auth: yes
+        status_code: 201
+        headers:
+          Authorization: "Bearer {{ response['json']['token'] }}"
+          Content-Type: "application/json"
+      register: output
+
+    - name: Show the return output
+      debug:
+        var: output
+        verbosity: 1

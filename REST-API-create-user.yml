@@ -1,0 +1,36 @@
+# Use firefox to browse the API to api/v2/users
+# Use the OPTIONS action button to get info on the endpoint
+# - Scroll through and you will see the POST action and the 
+#   list of fields it accepts and whether it is required or not
+
+- name: Create a user on tower using the REST API
+  hosts: localhost
+  gather_facts: false
+  vars:
+    tower_host: tower.lab.example.com
+    tower_user: admin
+    tower_pass: redhat
+  tasks:
+    - name: Create a tower user via REST API
+      uri:
+        url: "{{ 'https://' + tower_host + '/api/v2/users/' | urlencode }}"
+        # https://tower.lab.example.com/api/v2/users/
+        method: POST
+        validate_certs: no
+        return_content: yes
+        user: "{{ tower_user }}"
+        password: "{{ tower_pass }}"
+        force_basic_auth: yes
+        status_code: 201
+        body:
+          username: "zzuser"
+          first_name: "zz"
+          last_name: "adam"
+          email: "zz@lab.example.com"
+          password: "redhat"
+        body_format: json
+      register: output
+    - name: Show the return output
+      debug:
+        var: output
+        verbosity: 1

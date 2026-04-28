@@ -39,7 +39,7 @@ items:
       sourceStrategy:
         from:
           kind: ImageStreamTag
-          name: nodejs:6
+          name: nodejs:latest
           namespace: openshift
       type: Source
     triggers:

@@ -23,7 +23,7 @@
         name: nodejs-ex
         type: NodePort
         ports:
-          - port: 8080
+          - port: 443
             protocol: TCP
             
             
@@ -39,7 +39,7 @@
         state: present
         name: nodejs-ex
         ports:
-          - port: 443
+          - port: 8080
             protocol: TCP
         selector:
           app: nodejs-ex  

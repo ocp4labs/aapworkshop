@@ -13,7 +13,7 @@
   tasks:
     - name: Create a tower user via REST API
       uri:
-        url: "{{ 'https://' + tower_host + '/api/v2/users/' | urlencode }}"
+        url: "{{ 'https://' + tower_host + '/api/controller/v2/users/' | urlencode }}"
         # https://tower.lab.example.com/api/v2/users/
         method: POST
         validate_certs: no
